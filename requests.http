@@ -1,0 +1,71 @@
+### Get all tasks
+GET http://localhost:8080/tasks
+Content-Type: application/json
+
+### Create a first task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+"title": "Do laundry",
+"timeWeight": "SHORT",
+"location": "HOME"
+}
+
+### Create a second task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Study Spring Boot",
+  "timeWeight": "SHORT",
+  "location": "HOME"
+}
+
+### Create a third task
+POST http://localhost:8080/tasks
+Content-Type: application/json
+
+{
+  "title": "Go for a run",
+  "timeWeight": "MEDIUM",
+  "location": "OUTSIDE"
+}
+
+### Get all tasks
+GET http://localhost:8080/tasks
+
+### Get task by valid ID
+GET http://localhost:8080/tasks/1
+
+### Get task by INVALID ID — expect 404
+GET http://localhost:8080/tasks/999
+
+### Update task 1
+PUT http://localhost:8080/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Study Spring Boot (updated)",
+  "timeWeight": "LONG",
+  "location": "HOME"
+}
+
+### Update MISSING task — expect 404
+PUT http://localhost:8080/tasks/999
+Content-Type: application/json
+
+{
+  "title": "Ghost task",
+  "timeWeight": "SHORT",
+  "location": "HOME"
+}
+
+### Delete task 2
+DELETE http://localhost:8080/tasks/2
+
+### Delete ALREADY DELETED task — expect 404
+DELETE http://localhost:8080/tasks/2
+
+### Get all tasks — should only show task 1 now
+GET http://localhost:8080/tasks

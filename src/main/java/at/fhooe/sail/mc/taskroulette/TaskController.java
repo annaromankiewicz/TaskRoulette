@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
 @RequestMapping("/tasks")
@@ -15,6 +16,7 @@ import java.util.List;
 public class TaskController {
 
     private List<Task> tasks = new ArrayList<>();
+    private final AtomicLong idCounter = new AtomicLong(0);
 
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
@@ -32,23 +34,30 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
-        task.setId((long) (tasks.size()+1));
-        tasks.add(task);
-        return  ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(task);
+        if (!(task.getTitle() == null && task.getTitle().isBlank())) {
+            task.setId(idCounter.incrementAndGet());
+            tasks.add(task);
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(task);
+        }
+        else return ResponseEntity.badRequest().build();
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
-        for (int i = 0; i < tasks.size(); i++) {
-            if (id.equals(tasks.get(i).getId())) {
-                task.setId(id);
-                tasks.set(i, task);
-                return ResponseEntity.ok(task); // 200 + status code
+        if (!(task.getTitle() == null && task.getTitle().isBlank())) {
+            for (int i = 0; i < tasks.size(); i++) {
+                if (id.equals(tasks.get(i).getId())) {
+                    task.setId(id);
+                    tasks.set(i, task);
+                    return ResponseEntity.ok(task); // 200 + status code
+                }
             }
+            return ResponseEntity.notFound().build(); // 404
+        } else {
+            ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.notFound().build(); // 404
     }
 
     @DeleteMapping("/{id}")

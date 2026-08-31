@@ -1,0 +1,6 @@
+#FileLock
+#Mon Aug 31 10:03:00 CST 2026
+hostName=mac
+id=1a0588f4763c42d16b6f55ac32af962ae03ab2ae405
+method=file
+server=192.168.1.148\:50392

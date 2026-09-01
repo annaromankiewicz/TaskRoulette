@@ -201,3 +201,7 @@ DROP TABLE TASKS [90107-240]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:480)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:57)
 	at java.base/java.lang.Thread.run(Thread.java:1474)
+2026-09-01 14:05:47.450092-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]spring.jpa.show-sql=true\000d\000aspring.jpa.properties.hibernate.format_sql=true"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.format_sql=true [42001-240]

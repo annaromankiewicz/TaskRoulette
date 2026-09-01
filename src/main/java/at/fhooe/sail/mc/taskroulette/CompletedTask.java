@@ -19,7 +19,7 @@ public class CompletedTask {
     private Task task;
 
     @ManyToOne
-    @JoinColumn(name = "reward_id")
+    @JoinColumn(name = "reward_id") // nullable = true is default value - think about it
     private Reward reward;
 
 

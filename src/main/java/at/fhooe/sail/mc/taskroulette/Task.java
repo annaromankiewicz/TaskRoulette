@@ -1,17 +1,17 @@
 package at.fhooe.sail.mc.taskroulette;
 
-import com.google.errorprone.annotations.InlineMeValidationDisabled;
 import jakarta.persistence.*;
 
+import java.time.Instant;
 import java.util.Objects;
 
 @Entity
-@Table(name="Task")
+@Table(name = "Task")
 
 
 public class Task {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -22,19 +22,42 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Location location;
 
-    private boolean completed;
+    @Enumerated(EnumType.STRING)
+    private State state;
 
-    public Task(String title, TimeWeight timeWeight) {
-            this.title = Objects.requireNonNull(title, "Title must be not null");
-            this.timeWeight = Objects.requireNonNull(timeWeight, "Time weight has to be not null");
+    private Instant activatedAt;
+
+
+
+    public Task(String title, TimeWeight timeWeight, Location location) {
+        this.title = Objects.requireNonNull(title, "Title must be not null");
+        this.timeWeight = Objects.requireNonNull(timeWeight, "Time weight has to be not null");
+        state = State.BACKLOG;
+        this.location = location;
     }
 
     protected Task() {
     }
 
+    public boolean setInProgress() {
+        if (state == State.BACKLOG) {
+            state=State.IN_PROGRESS;
+            activatedAt = Instant.now();
+            return true;
+        } return false;
+    }
 
+    public boolean setCompleted() {
+        if (state==State.DONE) return false;
+        state = State.DONE;
+        return true;
+    }
 
-// getters and setters or later with lombok interface with @Data
+    public void setBacklog() {
+        state = State.BACKLOG;
+    }
+
+    // getters and setters or later with lombok interface with @Data
     public void setId(long id) {
         this.id = id;
     }
@@ -59,12 +82,22 @@ public class Task {
         return this.title;
     }
 
+    public State getState() {
+        return this.state;
+    }
+
+
+
     public TimeWeight getTimeWeight() {
         return this.timeWeight;
     }
 
     public Location getLocation() {
         return this.location;
+    }
+
+    public Instant getActivatedAt() {
+        return activatedAt;
     }
 
 }

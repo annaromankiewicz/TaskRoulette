@@ -265,11 +265,3 @@ src/main/java/at/fhooe/sail/mc/taskroulette/
 - [ ] W3 — Service layer, DTOs, pick + complete logic
 - [ ] W4 — Tests, CI, Swagger docs
 
-### Backlog / decided but not built
-
-- `TimeWeight` naming mismatch between README and code
-- `location` is not set by the `Task` constructor — seeded tasks have `null`, which will not match any location filter
-- `getId()` returns `long` while the field is `Long` — NPE on an unsaved task
-- Expiry timeout and scan interval belong in `application.properties`, not as constants
-- Two clients can pick the same task concurrently — `@Version` / optimistic locking is the answer when it matters
-- Inject a `Clock` instead of calling `Instant.now()` directly, so expiry is testable without waiting

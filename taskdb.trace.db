@@ -205,3 +205,24 @@ DROP TABLE TASKS [90107-240]
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]spring.jpa.show-sql=true\000d\000aspring.jpa.properties.hibernate.format_sql=true"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true [42001-240]
+2026-09-02 13:41:05.828848-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPLETEDTASK" not found; SQL statement:
+select id, title, rewar, task from completedTask [42102-240]
+2026-09-02 13:41:38.268213-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPLETEDTASK" not found; SQL statement:
+select id, title, rewar, task from completedTask [42102-240]
+2026-09-02 13:41:42.440238-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPLETEDTASK" not found; SQL statement:
+select id, title, reward, task from completedTask [42102-240]
+2026-09-02 13:42:07.796501-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "COMPLETEDTASK" not found; SQL statement:
+select * from completedtask [42102-240]
+2026-09-02 14:02:27.958756-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]selct id, title, state from task"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+selct id, title, state from task [42001-240]
+2026-09-02 14:11:52.825445-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "delete [*]* from completed_task"; expected "identifier"; SQL statement:
+delete * from completed_task [42001-240]
+2026-09-02 14:12:04.348464-06:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "drop [*]* from completed_task"; expected "TABLE, INDEX, USER, SEQUENCE, CONSTANT, TRIGGER, MATERIALIZED, VIEW, ROLE, ALIAS, SCHEMA, ALL OBJECTS, DOMAIN, TYPE, AGGREGATE, SYNONYM"; SQL statement:
+drop * from completed_task [42001-240]

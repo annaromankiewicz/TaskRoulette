@@ -47,10 +47,11 @@ public class Task {
         } return false;
     }
 
-    public boolean setCompleted() {
-        if (state==State.DONE) return false;
-        state = State.DONE;
-        return true;
+    public boolean setComplete() {
+        if (state == State.IN_PROGRESS) {
+            state = State.DONE;
+            return true;
+        } return false;
     }
 
     public void setBacklog() {

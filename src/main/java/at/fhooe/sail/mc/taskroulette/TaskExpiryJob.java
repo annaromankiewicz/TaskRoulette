@@ -25,7 +25,6 @@ public class TaskExpiryJob {
     }
 
 
-
     @Transactional
     @Scheduled(fixedRate = 1, timeUnit = TimeUnit.MINUTES)     // check time
     public void taskExpired() {
